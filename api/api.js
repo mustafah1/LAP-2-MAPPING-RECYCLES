@@ -4,6 +4,7 @@ const cors = require('cors');
 const logRoutes = require('./middleware/logger');
 const postRouter = require('./routers/post');
 const userRouter = require('./routers/user');
+const geoRouter = require ('./routers/geo')
 
 const api = express();
 
@@ -20,5 +21,6 @@ api.get("/", (req, res) => {
 
 api.use("/posts", postRouter);
 api.use("/users", userRouter);
+api.use("/geojson", geoRouter);
 
 module.exports = api;
