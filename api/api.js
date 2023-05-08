@@ -12,15 +12,15 @@ api.use(cors());
 api.use(express.json());
 api.use(logRoutes);
 
-// api.get("/", (req, res) => {
-//     res.json({
-//         name: "Discretion",
-//         description: "Send and receive private messages."
-//     })
-// })
-api.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-  });
+api.get("/", (req, res) => {
+    res.json({
+        name: "Discretion",
+        description: "Send and receive private messages."
+    })
+})
+// api.get('/', function(req, res) {
+//     res.sendFile(path.join(__dirname, '../client/index.html'));
+//   });
 api.use("/posts", postRouter);
 api.use("/users", userRouter);
 
