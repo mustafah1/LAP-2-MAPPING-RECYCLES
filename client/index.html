@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Display a popup on click</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-<link rel="stylesheet" href="./index.css">
-<script defer src="./index.js"></script>
-</head>
-<body>
-<div id="map"></div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Display a popup on click</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="./index.css" />
+    <script defer src="./index.js" type = "module"></script>
+  </head>
+  <body>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" >&times;</a> 
+        <!-- onclick="closeNav()" -->
+        <a href="#"><b>Places</b></a>
+      </div>
+      
+      <!-- Use any element to open the sidenav -->
+      <!-- <span onclick="openNav()">open</span> -->
+      
+      <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+      <div id="main">
+        <div id="map"></div>
+      </div>
+
+  </body>
 </html>
