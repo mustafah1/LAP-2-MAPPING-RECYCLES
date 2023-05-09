@@ -79,11 +79,16 @@ map.on("load", async () => {
       let coorDescrArray = getFeaturesByDescriptionSubstring(buttons[i].innerText, data)
 
       console.log(coorDescrArray)
-      //fetch the data from api: coords, descr
 
       //console.log(data);
 
-      new mapboxgl.Popup().setLngLat(coorDescrArray[i].coordinates).setHTML(coorDescrArray[i].description).addTo(map);
+      for (let j = 0; j < coorDescrArray.length; j++) // how to get rid of other open popups? / also to center the map on the popup
+      {
+        if (extractString(coorDescrArray[j].description) == buttons[i].innerText)
+        {
+            new mapboxgl.Popup().setLngLat(coorDescrArray[j].coordinates).setHTML(coorDescrArray[j].description).addTo(map);
+        }
+      }
     };
   }
 });
@@ -106,7 +111,7 @@ async function getGeoJsonObj() {
   }
 }
 
-//function to get coordinates and description for a place name, from the geojson data - only working for the first item - issue here or in event handler call?
+//function to get coordinates and description for a place name, from the geojson data
 function getFeaturesByDescriptionSubstring(substring, data) {
     const features = data.data.features;
     const result = [];
