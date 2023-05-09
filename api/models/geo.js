@@ -18,27 +18,44 @@ class Geo {
       this.data.features.push(feature);
     }
 
-    static async getFeature() {
+    static async getFeatures() {
 
         const response = await db.query("SELECT description, icon, ST_AsGeoJSON(geom) as geom FROM points")
-        console.log(response)
+        //console.log(response)
        // return response.rows.map(p => new Geo(p));
 
-       return response.rows.map(p => 
-        new Geo("geojson", [
+    //    return response.rows.map(p => 
+    //     new Geo("geojson", [
+    //         {
+    //           type: "Feature",
+    //           properties: {
+    //             description: p.description,
+    //             icon: p.icon,
+    //           },
+    //           geometry: 
+
+    //         JSON.parse(p.geom)
+    //           ,
+    //         },
+    //       ])
+    //     )
+
+        let features = response.rows.map( p => (
             {
               type: "Feature",
               properties: {
                 description: p.description,
                 icon: p.icon,
               },
-              geometry: 
-
-            JSON.parse(p.geom)
+              geometry: JSON.parse(p.geom)
               ,
-            },
-          ])
-        )
+            }
+        ))
+
+          console.log(features)
+
+        return new Geo("geojson", features)
+
 
   }
 }
