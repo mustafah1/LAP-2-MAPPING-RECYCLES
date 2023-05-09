@@ -2,32 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/favicon.ico">
-    <link rel="stylesheet" href="./assets/default.css">
-    <script src="./assets/register.js" defer></script>
-    <title>Discretion</title>
+    <title>Diary</title>
+    <link rel="stylesheet" href="./login.css">
+
+    <script defer src="./assets/login.js"></script>
+
 </head>
 <body>
-    <header>
-        <h1>Discretion</h1>
-        <em>Not everything needs to be public.</em>
-    </header>
-    <hr />
-    <main>
-        <form id="register-form">
-            <fieldset>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-            </fieldset>
-            <fieldset>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
-            </fieldset>
-            <input type="submit" value="Register">
-        </form>
-        <p>Already registered? <a href="./login.html">Log in here</a>.</p>
-    </main>
+    <nav>
+        <a href="index.html" id="logo">MY MAP</a>
+            <a href="index.html" id="HOME">Back HOME</a>
+        
+    </nav>
+    <div id="main-container">
+        <div id="box1">
+            <h2>Register to go through to your Map!</h2>
+            <main>
+                <form id="register-form">
+                    <fieldset>
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username">
+                    </fieldset>
+                    <fieldset>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password">
+                    </fieldset>
+                    <input type="submit" value="Register">
+                </form>
+                <p>Already registered? <a href="./login.html">Log in here</a>.</p>
+            </main>
+    </div>
+
+    <script>        
+        const form = document.getElementById("register-form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        // Validate the user's input
+        if (username !== "" && password !== "") {
+            // Redirect to the diary page
+            window.location.href = "./diary.html";
+        } else {
+            alert("Please enter a username and password.");
+        }
+    });
+    </script>
 </body>
 </html>
+    

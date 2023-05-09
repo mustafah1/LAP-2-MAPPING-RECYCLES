@@ -2,32 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/favicon.ico">
-    <link rel="stylesheet" href="./assets/default.css">
-    <script src="./assets/login.js" defer></script>
-    <title>Discretion</title>
+    <title>Diary</title>
+    <link rel="stylesheet" href="./login.css">
+
+    <script defer src="./assets/login.js"></script>
+
 </head>
 <body>
-    <header>
-        <h1>Discretion</h1>
-        <em>Not everything needs to be public.</em>
-    </header>
-    <hr />
-    <main>
-        <form id="login-form">
-            <fieldset>
+    <nav>
+        <a href="index.html" id="logo">MY MAP</a>
+            <a href="index.html" id="HOME">Back HOME</a>
+        
+    </nav>
+    <div id="main-container">
+        <div id="box1">
+            <h2>Login in to go through to your Map!</h2>
+            <div id="container">
+              <h3 id="text"></h3>
+              <em id="play"></em>
+            </div>
+            <form id="login-form" action="diary.html">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-            </fieldset>
-            <fieldset>
+                <input type="text" id="username" name="username" placeholder="Enter username...">
+                <br><br>
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
-            </fieldset>
-            <input type="submit" value="Log in">
-        </form>
-        <p>No account? <a href="./register.html">Sign up here</a>.</p>
-    </main>
+                <input type="password" id="password" name="password" placeholder="Enter password...">
+                <br><br>
+                <button type="submit" class="block"><b>Login</b></button>
+            </form>
+            <div class="dropdown">
+                <button id="signup-btn" onclick="toggleDropdown()"></button>
+                <div class="dropdown-content" id="signup-dropdown">
+                    <a href="register.html">Create an account</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div id="box2">
+        <h4><u>Connect on social media!</u></h4>
+        <p> <span>Facebook</span> <br><br>
+    
+            
+            <span>Instagram</span> <br><br>
+            
+        
+            
+            <span>Twitter</span>  <br><br>
+            
+            <span></span>  <br><br>
+        </p>
+    </div>
+    <script>        
+        const form = document.getElementById("login-form");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            
+            // Validate the user's input
+            if (username === "myusername" && password === "mypassword") {
+                // Redirect to the diary page
+                window.location.href = form.action;
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        });
+        function toggleDropdown() {
+            const dropdown = document.getElementById("signup-dropdown");
+            dropdown.classList.toggle("show");
+        }
+        // this closes the dropdown if the user clicks outside of it
+        window.onclick = (event) => {
+            if (!event.target.matches(".dropdown button")) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (const dropdown of dropdowns) {
+                    if (dropdown.classList.contains("show")) {
+                        dropdown.classList.remove("show");
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
