@@ -2,7 +2,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
+    background-color: #d1d4d2;
     height: 50px;
     padding: 0 20px;
     border-radius: 20px;
@@ -12,13 +12,13 @@ nav {
     margin-left: 45%;
     font-size: 24px;
     text-decoration: none;
-    color: rgb(208, 216, 208);
+    color: rgb(22, 23, 22);
   }
 
   #sign-in {
     font-size: 16px;
     text-decoration: none;
-    color: rgb(208, 216, 208);
+    color:rgb(22, 23, 22);
     margin-left: auto;
   }
 
@@ -86,6 +86,7 @@ div[id^='box']:hover {
     width: 25%;
     height: 200px;
     padding: 20px;
+    margin-top: 100px;
     border: 1px solid white;
     background-color: #33333391;
     border-radius: 10px;
@@ -96,6 +97,7 @@ div[id^='box']:hover {
     width: 25%;
     height: 200px;
     padding: 20px;
+    margin-top: 100px;
     border: 1px solid white;
     background-color: #33333391;
     border-radius: 10px;
@@ -106,13 +108,22 @@ div[id^='box']:hover {
     width: 25%;
     height: 200px;
     padding: 20px;
+    margin-top: 100px;
     border: 1px solid white;
     background-color: #33333391;
     border-radius: 10px;
 }
 
 .description {
-    padding-top: 80%;
+    padding-top: 250px;
+    font-size: small;
+    width: 300px;
   }
+
+.description1 {
+    font-size: small;
+    margin-top: 250px;
+    width: 300px;
+}
   
   
