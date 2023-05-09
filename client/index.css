@@ -20,7 +20,17 @@ nav {
     box-shadow: 0px 0px 20px #BFC9D1;
 }
 
+div[id^='box'] {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    margin: 10px;
+    cursor: pointer;
+}
 
+div[id^='box']:hover {
+    background-color: #ddd;
+}
 
   #main-container {
     display: flex;
@@ -28,6 +38,7 @@ nav {
     margin: 20px 0;
   }
 #box1 {
+    background-image: url("./assets/images/post\ office.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -36,7 +47,9 @@ nav {
     border-radius: 10px;
   }
 
-#box2 {width: 25%;
+#box2 {
+    background-image: url("./assets/images/lake.jpeg");
+    width: 25%;
     height: 200px;
     padding: 20px;
     border: 1px solid white;
@@ -44,7 +57,9 @@ nav {
     border-radius: 10px;
 }
 
-#box3 {width: 25%;
+#box3 {
+    background-image: url("./assets/images/deer.jpeg");
+    width: 25%;
     height: 200px;
     padding: 20px;
     border: 1px solid white;
@@ -52,7 +67,9 @@ nav {
     border-radius: 10px;
 }
 
-#box4 {width: 25%;
+#box4 {
+    background-image: url("./assets/images/walk.webp");
+    width: 25%;
     height: 200px;
     padding: 20px;
     border: 1px solid white;
@@ -60,7 +77,9 @@ nav {
     border-radius: 10px;
 }
 
-#box5 {width: 25%;
+#box5 {
+    background-image: url("./assets/images/playground.jpeg");
+    width: 25%;
     height: 200px;
     padding: 20px;
     border: 1px solid white;
@@ -68,7 +87,9 @@ nav {
     border-radius: 10px;
 }
 
-#box6 {width: 25%;
+#box6 {
+    background-image: url("./assets/images/museum.jpeg");
+    width: 25%;
     height: 200px;
     padding: 20px;
     border: 1px solid white;
