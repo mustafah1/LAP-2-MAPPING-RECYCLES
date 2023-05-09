@@ -6,7 +6,7 @@ Minimal Mapbox MVC app using postgres database
 
 - cd into `/api` and run `npm i` to install dependencies
 - create `.env` file in `/api` folder with the environment variables `PORT=` server port (e.g. 3000), `DB_URL=` postgres db connection string - <b>database must have PostGIS extension installed</b>
-- add your Mapbox API key to `client/index.js`
+- add your Mapbox API key to `client/mapboxapi.js` as follows: `export const mapboxApiToken = "MAPBOX_API_TOKEN"`
 ## How to run the server
 
 - cd into `/api` 
