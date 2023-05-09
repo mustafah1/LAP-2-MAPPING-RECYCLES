@@ -36,6 +36,8 @@
               <div class="text-center"><h2>Sing in</h2></div>
               <div class="form-outline mb-4">
                 <input
+                  id="username"
+                  name="username"
                   type="username"
                   class="form-control form-control-lg"
                   for="username"
@@ -47,14 +49,14 @@
               <!-- Password input -->
               <div class="form-outline mb-3">
                 <input
+                  id="password"
+                  name="password"
                   type="password"
                   for="password"
                   class="form-control form-control-lg"
                   placeholder="Enter password"
                 />
-                <label id="password" class="form-label" for="password"
-                  >Password</label
-                >
+                <label class="form-label" for="password">Password</label>
               </div>
 
               <div class="d-flex justify-content-between align-items-center">
@@ -75,7 +77,6 @@
 
               <div class="text-center text-lg-start mt-4 pt-2">
                 <button
-                  id="username"
                   type="submit"
                   class="btn btn-primary btn-lg"
                   style="padding-left: 2.5rem; padding-right: 2.5rem"
