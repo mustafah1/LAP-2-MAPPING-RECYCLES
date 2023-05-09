@@ -1,3 +1,5 @@
+const serverUrl = "https://diarysite.onrender.com";
+
 document
   .getElementById("register-form")
   .addEventListener("submit", async (e) => {
@@ -16,9 +18,11 @@ document
         password: form.get("password"),
       }),
     };
+    console.log(options);
 
     const response = await fetch(
-      "https://millionairesbackend.onrender.com/users/register",
+      // "https://millionairesbackend.onrender.com/users/register",
+      "https://diarysite.onrender.com/users/register",
       options
     );
     const data = await response.json();

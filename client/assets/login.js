@@ -1,3 +1,5 @@
+const serverUrl = "https://diarysite.onrender.com";
+
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -17,7 +19,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
   console.log(options);
   const response = await fetch(
-    "https://millionairesbackend.onrender.com/users/login",
+    // "https://millionairesbackend.onrender.com/users/login",
+    // "https://diarysite.onrender.com/users/login",
+    `${serverUrl}/users/login`,
     options
   );
   const data = await response.json();
