@@ -2,7 +2,7 @@
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
 mapboxgl.accessToken =
-  "";
+  "pk.eyJ1IjoiZ29udGk2NjYiLCJhIjoiY2tnZHJreGNnMDl5cTJ0bmF6eXl3dDR0ZSJ9.DtOscfMRAlrFIVUfRohDgg";
 const map = new mapboxgl.Map({
   container: "map",
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
@@ -12,13 +12,12 @@ const map = new mapboxgl.Map({
 });
 
 map.on("load", async () => {
-  map.loadImage(
-    "https://docs.mapbox.com/mapbox-gl-js/assets/cat.png", //need to get these images from backend / host them somewhere
-    async (error, image) => {
-      if (error) throw error;
+//   map.loadImage(  "https://docs.mapbox.com/mapbox-gl-js/assets/cat.png", //need to get these images from backend / host them somewhere
+//     async (error, image) => {
+//       if (error) throw error;
 
       // Add the image to the map style.
-      map.addImage("cat", image);
+     // map.addImage("cat", image);
 
       //get our geojson data from the database
       let data = await getGeoJsonObj();
@@ -34,7 +33,7 @@ map.on("load", async () => {
         type: "symbol",
         source: "places",
         layout: {
-          "icon-image": "cat", // ['get', 'icon'],
+          "icon-image": ['get', 'icon'],
           "icon-allow-overlap": true,
         },
       });
@@ -70,7 +69,9 @@ map.on("load", async () => {
       });
     }
   );
-});
+
+
+// }); //use this if adding custom images instead
 
 //function to get the geojson object from the db
 async function getGeoJsonObj() {
@@ -78,8 +79,8 @@ async function getGeoJsonObj() {
 
   if (response.status == 200) {
     const geoJsonData = await response.json();
-    //console.log(geoJsonData[0].data)
-    return geoJsonData[0]; //get the first element in the array - need to rewrite model? / stringify here?
+    console.log(geoJsonData)
+    return geoJsonData;
   } else {
     return "error";
   }

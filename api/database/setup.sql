@@ -35,7 +35,13 @@ CREATE TABLE points (
 INSERT INTO points (description, icon, geom)
 VALUES (
   '<strong>Make it Mount Pleasant</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
-  'theatre-15',
+  'theatre',
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.038659, 38.931567]}'))
-);
+),
+(
+  '<strong>Mad Men Season Five Finale Watch Party</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a <a href="http://madmens5finale.eventbrite.com/" target="_blank" title="Opens in a new window">Mad Men Season Five Finale Watch Party</a>, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>',
+  'theatre',
+  (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.003168, 38.894651]}'))
+)
+;
 
