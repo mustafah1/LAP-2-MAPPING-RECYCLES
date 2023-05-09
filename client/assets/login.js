@@ -16,7 +16,10 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   };
 
   console.log(options);
-  const response = await fetch("http://localhost:3000/users/login", options);
+  const response = await fetch(
+    "https://millionairesbackend.onrender.com/users/login",
+    options
+  );
   const data = await response.json();
   console.log(data);
 

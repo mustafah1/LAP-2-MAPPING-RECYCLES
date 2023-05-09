@@ -18,7 +18,7 @@ document
     };
 
     const response = await fetch(
-      "http://localhost:3000/users/register",
+      "https://millionairesbackend.onrender.com/users/register",
       options
     );
     const data = await response.json();
