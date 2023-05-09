@@ -98,7 +98,7 @@ function closeNav() {
 }
 
 function createOpenNavElem () {
-document.getElementById("mySidenav").addEventListener("click", closeNav);
+document.getElementsByClassName("closebtn")[0].addEventListener("click", closeNav);
 
 let openNavSpan = document.createElement("span");
 openNavSpan.id = "openNav";
