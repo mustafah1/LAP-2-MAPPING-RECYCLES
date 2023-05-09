@@ -18,19 +18,6 @@ api.get("/", (req, res) => {
     description: "Send and receive private messages.",
   });
 });
-api.use(express.static(__dirname));
-// sendFile will go here
-
-api.post("/", (req, res) => {
-  res.send("POST request to the homepage");
-  res.sendFile(path.join(__dirname, "..", "/client/index.html"));
-});
-// api.use(express.static(__dirname));
-// sendFile will go here
-// api.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, '..', '/client/index.html'));
-//   });
-
 api.use("/posts", postRouter);
 api.use("/users", userRouter);
 
