@@ -21,6 +21,12 @@ describe('api server', () => {
             .expect(200, done)
     })
 
+    test('responds to invalid method request with 404', (done) => {
+        request(api)
+            .post('/')
+            .expect(404, done)
+    })
+
     
     
 })
