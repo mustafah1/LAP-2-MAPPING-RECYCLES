@@ -21,8 +21,7 @@ document
     console.log(options);
 
     const response = await fetch(
-      // "https://millionairesbackend.onrender.com/users/register",
-      "https://diarysite.onrender.com/users/register",
+      `${serverUrl}/users/register`,
       options
     );
     const data = await response.json();
@@ -30,6 +29,6 @@ document
     if (response.status == 201) {
       window.location.assign("login.html");
     } else {
-      alert(data.error);
+      alert("Please try a different username or password");
     }
   });
