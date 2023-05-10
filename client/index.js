@@ -93,6 +93,7 @@ map.on("load", async () => {
   }
 });
 
+//for the sidebar
 createOpenNavElem();
 //addToFavourites();
 // }); //use this if adding custom images instead
@@ -158,6 +159,47 @@ function createOpenNavElem() {
   openNavSpan.addEventListener("click", openNav);
 }
 
+function createFavouritesButton() {
+
+    const favButton = document.createElement("button");
+    favButton.className = "button";
+    favButton.id = "no";
+
+    const svgElement = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "svg"
+      );
+      svgElement.setAttribute("width", "24");
+      svgElement.setAttribute("height", "24");
+      svgElement.setAttribute("viewBox", "0 0 24 24");
+   
+      const path1 = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+      path1.setAttribute(
+        "d",
+        "M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"
+      );
+  
+      svgElement.appendChild(path1);
+
+      favButton.appendChild(svgElement);
+
+      favButton.addEventListener("click", () => {
+        if (favButton.id === "no") {
+            favButton.id = "yes"
+            favButton.classList.add("active");
+        } else if (favButton.id === "yes") {
+            favButton.id = "no"
+            favButton.classList.remove("active");
+        }
+      })
+
+      return favButton;
+
+}
+
 //function to add places buttons based on backend places data
 function createPlacesButtons(data) {
   const sideNavDiv = document.getElementById("mySidenav");
@@ -174,34 +216,17 @@ function createPlacesButtons(data) {
 
   for (let i = 0; i < placeNameArray.length; i++) {
     const lineDiv = document.createElement("div");
+    lineDiv.className = "align"
 
     const placeButton = document.createElement("a");
     placeButton.className = "placeButton";
     placeButton.innerText = placeNameArray[i];
 
-    const svgElement = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "svg"
-    );
-    svgElement.setAttribute("width", "24");
-    svgElement.setAttribute("height", "24");
-    svgElement.setAttribute("viewBox", "0 0 24 24");
-
-    svgElement.setAttribute("className", "favourite");
-
-    const path1 = document.createElementNS(
-      "http://www.w3.org/2000/svg",
-      "path"
-    );
-    path1.setAttribute(
-      "d",
-      "M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"
-    );
-
-    svgElement.appendChild(path1);
+    let favButton = createFavouritesButton()
 
     lineDiv.appendChild(placeButton);
-    lineDiv.appendChild(svgElement);
+    lineDiv.appendChild(favButton)
+   // lineDiv.appendChild(svgElement);
     //sideNavDiv.appendChild(svgElement);
 
     sideNavDiv.appendChild(lineDiv);
