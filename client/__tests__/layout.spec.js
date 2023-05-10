@@ -1,5 +1,20 @@
 const { renderDOM } = require('./helpers');
 let dom; let document;
+
+describe('index.html', () => {
+    beforeEach(async () => {
+        dom = await renderDOM('./index.html');
+        document = await dom.window.document;
+    })
+    
+    it('tag with id = "map" is empty when the website loads', () => {
+        const map = document.querySelector('#map');
+        expect(map.innerHTML).toContain("")
+    })
+    
+   })
+
+
 describe('register.html', () => {
     beforeEach(async () => {
         dom = await renderDOM('./register.html');
