@@ -19,8 +19,6 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
   console.log(options);
   const response = await fetch(
-    // "https://millionairesbackend.onrender.com/users/login",
-    // "https://diarysite.onrender.com/users/login",
     `${serverUrl}/users/login`,
     options
   );
@@ -32,7 +30,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     console.log(" working: hit line 24");
     window.location.assign("board.html");
   } else {
-    console.log("error: hit line 27");
-    alert(data.error);
+    alert("Invalid username or password");
+
   }
 });
