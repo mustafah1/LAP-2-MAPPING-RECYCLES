@@ -6,9 +6,9 @@ describe('register.html', () => {
         document = await dom.window.document;
     })
     
-    it('has a button', () => {
-        const btn = document.querySelector('input');
-        expect(btn).toBeTruthy()
+    it('has an input', () => {
+        const input = document.querySelector('input');
+        expect(input).toBeTruthy()
     })
     
     // it('h1 is empty when website loads', () => {
