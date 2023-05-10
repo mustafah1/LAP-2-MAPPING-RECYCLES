@@ -1,13 +1,22 @@
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS token;
+DROP TABLE IF EXISTS favourites;
 DROP TABLE IF EXISTS user_account;
 DROP TABLE IF EXISTS points;
+
 
 CREATE TABLE post (
     post_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
     content VARCHAR (500) NOT NULL,
     PRIMARY KEY (post_id)
+);
+
+CREATE TABLE points (
+  points_id SERIAL PRIMARY KEY,
+  description TEXT,
+  icon TEXT,
+  geom GEOMETRY(Point, 4326)
 );
 
 CREATE TABLE user_account (
@@ -25,11 +34,12 @@ CREATE TABLE token (
     FOREIGN KEY (user_id) REFERENCES user_account("user_id")
 );
 
-CREATE TABLE points (
-  id SERIAL PRIMARY KEY,
-  description TEXT,
-  icon TEXT,
-  geom GEOMETRY(Point, 4326)
+CREATE TABLE favourites (
+  fav_id INT GENERATED ALWAYS AS IDENTITY,
+  user_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user_account("user_id"),
+  points_id INT NOT NULL,
+  FOREIGN KEY (points_id) REFERENCES points("points_id")
 );
 
 INSERT INTO points (description, icon, geom)
@@ -50,3 +60,5 @@ VALUES (
 )
 ;
 
+-- INSERT INTO favourites(user_id, points_id)
+-- VALUES (1, 3);

@@ -33,6 +33,8 @@ async function login (req, res) {
         } else {
             res.status(200).json({ authenticated: true });
         }
+
+
         
     } catch (err) {
         res.status(403).json({"error": err.message})
