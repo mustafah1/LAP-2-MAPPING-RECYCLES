@@ -296,6 +296,7 @@ function createPlacesButtons(data) {
 }
 
 //call this when page loads - after the buttons are added
+//re-enable favourites not working because of fav_id??
 async function loadFavourites(userId) {
 
   let favouriteObj = await getFavsByUserId(userId)
@@ -331,7 +332,7 @@ async function loadFavourites(userId) {
     for (let j= 0; j < buttonsArray.length; j++)
     {
       console.log(buttonsArray[j])
-      if (points_idArray[i] == j +1)      
+      if (points_idArray[i] == j +1) //index starts at 0     
       {
         console.log("got it")
         if (buttonsArray[j].id === "no") {
