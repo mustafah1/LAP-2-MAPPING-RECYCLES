@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Lobster&family=Mukta:wght@300&family=Rampart+One&family=Shantell+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
 
-    <script defer src="./assets/login.js"></script>
+    <script defer src="./assets/register.js"></script>
 
 </head>
 <body>
@@ -46,22 +46,17 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password">
                     </fieldset>
-                    <br><br>
-
-                    <fieldset>
-                        <label for="postcode">Postcode:</label>
-                        <input type="text" id="postcode" name="postcode">
-                    </fieldset>
+                    
 
                     <br><br>
-                    <input type="submit" value="Register">
+                    <input type="submit" value="Register" id="register">
                 </form>
 
                 <p>Already registered? <a href="./login.html">Log in here</a>.</p>
             </main>
     </div>
 
-    <script>        
+    <!-- <script>        
         const form = document.getElementById("register-form");
     form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -75,7 +70,7 @@
             alert("Please enter a username and password.");
         }
     });
-    </script>
+    </script> -->
 </body>
 </html>
     

@@ -118,7 +118,7 @@ div[id^='box']:hover {
     margin: 20px 0;
   }
 #box1 {
-    background-image: url("./assets/images/museum.jpeg");
+    background-image: url("./images/museum.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -128,7 +128,7 @@ div[id^='box']:hover {
   }
 
 #box2 {
-    background-image: url("./assets/images/lake.jpeg");
+    background-image: url("./images/lake.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -138,7 +138,7 @@ div[id^='box']:hover {
 }
 
 #box3 {
-    background-image: url("./assets/images/deer.jpeg");
+    background-image: url("./images/deer.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -148,7 +148,7 @@ div[id^='box']:hover {
 }
 
 #box4 {
-    background-image: url("./assets/images/dogsrunning.jpeg");
+    background-image: url("./images/dogsrunning.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -159,7 +159,7 @@ div[id^='box']:hover {
 }
 
 #box5 {
-    background-image: url("./assets/images/playground.jpeg");
+    background-image: url("./images/playground.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -170,7 +170,7 @@ div[id^='box']:hover {
 }
 
 #box6 {
-    background-image: url("./assets/images/post\ office.jpeg");
+    background-image: url("./images/post\ office.jpeg");
     width: 25%;
     height: 200px;
     padding: 20px;

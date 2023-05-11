@@ -18,10 +18,10 @@ document
         password: form.get("password"),
       }),
     };
-    console.log(options);
+
 
     const response = await fetch(
-      // "https://millionairesbackend.onrender.com/users/register",
+
       "https://diarysite.onrender.com/users/register",
       options
     );
@@ -30,6 +30,6 @@ document
     if (response.status == 201) {
       window.location.assign("login.html");
     } else {
-      alert(data.error);
+      alert("Try another username or password");
     }
   });
