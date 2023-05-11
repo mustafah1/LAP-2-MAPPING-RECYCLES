@@ -85,8 +85,8 @@ VALUES (
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.090372, 38.881189]}'))
 );
 
-INSERT INTO favourites(user_id, points_id)
-VALUES (1, 3);
+-- INSERT INTO favourites(user_id, points_id)
+-- VALUES (1, 3);
 
   -- 'Make it Mount Pleasant',
   -- 'theatre-15',
