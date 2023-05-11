@@ -38,8 +38,15 @@ class Geo {
 
         return new Geo("geojson", features)
 
-
   }
+    static async getIdDescription() {
+        
+      const response = await db.query("SELECT points_id, description FROM points")
+
+      let idDescr = response.rows
+
+      return idDescr
+    }
 }
 
 module.exports = Geo;

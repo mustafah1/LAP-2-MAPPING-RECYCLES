@@ -127,6 +127,31 @@ async function getGeoJsonObj() {
   }
 }
 
+async function getIdDescrObj() {
+  const response = await fetch ("http://localhost:3000/geojson/iddescr");
+
+  if (response.status == 200) {
+    const geoJsonData = await response.json();
+    //console.log(geoJsonData)
+    return geoJsonData;
+  } else {
+    return "error";
+  }
+}
+
+async function getFavIdFromPointId(id) {
+
+  const response = await fetch (`http://localhost:3000/favourites/fav/${id}`);
+
+  if (response.status == 200) {
+    const fav_id = await response.json();
+    //console.log(geoJsonData)
+    return fav_id;
+  } else {
+    return "error";
+  }
+}
+
 //function to get coordinates and description for a place name, from the geojson data
 function getFeaturesByDescriptionSubstring(substring, data) {
     const features = data.data.features;
@@ -202,12 +227,21 @@ function createFavouritesButton() {
       favButton.appendChild(svgElement);
 
       favButton.addEventListener("click", () => {
+
+        const text = favButton.previousElementSibling.innerText
+        console.log("from event listener: " + text)
+
         if (favButton.id === "no") {
-            favButton.id = "yes"
+            favButton.id = "yes";
             favButton.classList.add("active");
+            //call here to add to favourites
+
+            addToFavourites(text)
         } else if (favButton.id === "yes") {
-            favButton.id = "no"
+            favButton.id = "no";
             favButton.classList.remove("active");
+            //remove from favourites
+            removeFavourite(text)
         }
       })
 
@@ -241,16 +275,86 @@ function createPlacesButtons(data) {
 
     lineDiv.appendChild(placeButton);
     lineDiv.appendChild(favButton)
-   // lineDiv.appendChild(svgElement);
-    //sideNavDiv.appendChild(svgElement);
-
     sideNavDiv.appendChild(lineDiv);
   }
 }
 
+async function loadFavourites(userId) {
+
+  //call this when page loads
+
+  //get favourrites by user
+
+  //update the status of the buttons based on this
+
+
+}
+
+async function getPointIdFromName(pointName) {
+
+  let idDescr = await getIdDescrObj()
+
+  for (let i=0; i < idDescr.length; i++)
+  {
+
+    if (extractString(idDescr[i].description) == pointName)
+    {
+      console.log("points_id: " + idDescr[i].points_id)
+      return idDescr[i].points_id
+    } 
+  }
+
+}
+
 //on click of favourite place, add it as favourite in the backend (?)
-function addToFavourites() {
+async function addToFavourites(pointName) {
   //document.getElementsByClassName("favourite")[0].addEventListener('click', console.log("add to fav"))
+
+  const options = {
+    method: "POST",
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        user_id: 1, //HARDCODED - get user id from login??
+        points_id: await getPointIdFromName(pointName) //get point id from the name??
+    })
+  }
+
+  console.log(options)
+
+  const result = await fetch("http://localhost:3000/favourites/", options)
+
+  if (result.status == 201) {
+    console.log("added to favourites");
+}
+
+}
+
+async function removeFavourite(pointName) {
+
+  const pointId = await getPointIdFromName(pointName)
+
+  console.log("pointId" + pointId)
+
+  const favouriteId = await getFavIdFromPointId(pointId) //get favId from pointId" 
+
+  console.log(favouriteId.fav_id)
+
+  fetch(`http://localhost:3000/favourites/${favouriteId.fav_id}`, {
+  method: "DELETE",
+})
+  .then(response => {
+    if (response.ok) {
+      console.log("Favourite deleted successfully");
+    } else {
+      console.error("Failed to delete favourite");
+    }
+  })
+  .catch(error => {
+    console.error(error);
+  });
 }
 
 function extractString(str) {
