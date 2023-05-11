@@ -8,16 +8,10 @@ const map = new mapboxgl.Map({
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: "mapbox://styles/mapbox/streets-v12",
   center: [-0.061725, 51.588963],
-  zoom: 11.15,
+  zoom: 13,
 });
 
 map.on("load", async () => {
-  //   map.loadImage(  "https://docs.mapbox.com/mapbox-gl-js/assets/cat.png", //need to get these images from backend / host them somewhere
-  //     async (error, image) => {
-  //       if (error) throw error;
-
-  // Add the image to the map style.
-  // map.addImage("cat", image);
 
   //get our geojson data from the database
   let data = await getGeoJsonObj(); //.then( resp => createPlacesButtons(resp));
@@ -87,8 +81,6 @@ map.on("load", async () => {
 
       console.log(coorDescrArray)
 
-      //console.log(data);
-
       for (let j = 0; j < coorDescrArray.length; j++) // how to get rid of other open popups? / also to center the map on the popup
       {
         if (extractString(coorDescrArray[j].description) == buttons[i].innerText)
@@ -113,10 +105,6 @@ map.on("load", async () => {
 //for the sidebar
 createOpenNavElem();
 
-//addToFavourites();
-// }); //use this if adding custom images instead
-
-//document.getElementsByClassName("placeButton").addEventListener('click', console.log("bla"))
 //function to get the geojson object from the db
 async function getGeoJsonObj() {
   const response = await fetch("http://localhost:3000/geojson");
@@ -301,24 +289,24 @@ async function loadFavourites(userId) {
 
   let favouriteObj = await getFavsByUserId(userId)
 
-  let favourites_idsArray = favouriteObj.favourite.favourites_ids
+  let favourites_idsArray = favouriteObj.favourite.favourites_ids //this is { user_id; points_id[] }
 
-  console.log(favourites_idsArray) //array of fav_id
+  console.log(favouriteObj)
 
-  //get points id from fav_id
-  //for each element in the array of fav_id - call localhost:3000/favourites/1 , get favourite.points_id
+  console.log("points_idsArray: " + favourites_idsArray) //array of points_id - THIS IS ACTUALLY points_ids???
 
-  let points_idArray = []
+  let fav_idArray = []
 
   for (let i= 0; i < favourites_idsArray.length; i++) {
-    const response = await fetch (`http://localhost:3000/favourites/${favourites_idsArray[i]}`);
 
-    if (response.status == 200) {
-      const favourite = await response.json();
+    const resp1 = await fetch (`http://localhost:3000/favourites/fav/${favourites_idsArray[i]}`)
+
+    if (resp1.status == 200) {
+      const favourite = await resp1.json();
       
-      points_idArray.push(favourite.favourite.points_id)
-      console.log(points_idArray)
-      //return points_idArray;
+      fav_idArray.push(favourite.fav_id)
+      console.log( fav_idArray)
+      //return fav_idArray;
     } else {
       return "error";
     }
@@ -326,13 +314,13 @@ async function loadFavourites(userId) {
 
   //update the status of the buttons based on points_id_Array
 
-  for (let i=0; i< points_idArray.length; i++)
+  for (let i=0; i< favourites_idsArray.length; i++)
   {
     let buttonsArray = document.getElementsByClassName("button")
     for (let j= 0; j < buttonsArray.length; j++)
     {
-      console.log(buttonsArray[j])
-      if (points_idArray[i] == j +1) //index starts at 0     
+      //console.log(buttonsArray[j])
+      if (favourites_idsArray[i] == j +1) //index starts at 0     
       {
         console.log("got it")
         if (buttonsArray[j].id === "no") {
@@ -365,7 +353,6 @@ async function getPointIdFromName(pointName) {
 
 //on click of favourite place, add it as favourite in the backend (?)
 async function addToFavourites(pointName) {
-  //document.getElementsByClassName("favourite")[0].addEventListener('click', console.log("add to fav"))
 
   const options = {
     method: "POST",
@@ -424,62 +411,3 @@ function extractString(str) {
     return null; // return null if no match found
   }
 }
-
-// function getGeoJsonData() {
-//   let obj = {
-//     type: "geojson",
-//     data: {
-//       type: "FeatureCollection",
-//       features: [
-//         {
-//           type: "Feature",
-//           properties: {
-//             description:
-//               '<strong>Make it Mount Pleasant</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
-//             icon: "theatre-15",
-//           },
-//           geometry: {
-//             type: "Point",
-//             coordinates: [-77.038659, 38.931567],
-//           },
-//         },
-//       ],
-//     },
-//   };
-
-//   console.log(obj);
-//   return obj;
-// }
-
-// let obj = {
-//   type: "geojson",
-//   data: {
-//     type: "FeatureCollection",
-//     features: [
-//       {
-//         type: "Feature",
-//         properties: {
-//           description:
-//             '<strong>Make it Mount Pleasant</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
-//           icon: "theatre",
-//         },
-//         geometry: {
-//           type: "Point",
-//           coordinates: [-77.038659, 38.931567],
-//         },
-//       },
-//       {
-//         type: "Feature",
-//         properties: {
-//           description:
-//             '<strong>Mad Men Season Five Finale Watch Party</strong><p>Head to Lounge 201 (201 Massachusetts Avenue NE) Sunday for a <a href="http://madmens5finale.eventbrite.com/" target="_blank" title="Opens in a new window">Mad Men Season Five Finale Watch Party</a>, complete with 60s costume contest, Mad Men trivia, and retro food and drink. 8:00-11:00 p.m. $10 general admission, $20 admission and two hour open bar.</p>',
-//           icon: "theatre",
-//         },
-//         geometry: {
-//           type: "Point",
-//           coordinates: [-77.003168, 38.894651],
-//         },
-//       },
-//     ],
-//   },
-// };

@@ -81,7 +81,7 @@ VALUES (
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-0.0674780314463801, 51.604350467808146]}'))
 ),
 (
-  '<strong>Craving - Asian fusion restaurant</strong><p><a href="http://www.craving.london/" target="_blank" title="Opens in a new window">Craving</a>is an industrial space with wooden stools and tables, for artisan espressos, light meals and cocktails.</p>',
+  '<strong>Craving - Asian fusion restaurant</strong><p><a href="http://www.craving.london/" target="_blank" title="Opens in a new window">Craving</a> is an industrial space with wooden stools and tables, for artisan espressos, light meals and cocktails.</p>',
   'restaurant',
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-0.0641145241201505, 51.58334776558324]}'))
 ),
@@ -91,7 +91,7 @@ VALUES (
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-0.051528573004545046, 51.58487322016508]}'))
 ),
 (
-  '<strong>Lee Valley Park</strong><p><a href="http://tallulaeatbar.ticketleap.com/2012beachblanket/" target="_blank" title="Opens in a new window">Lee Valley Park</a> is a 10,000-acre 26 miles long linear park, much of it green spaces, running through the northeast of Greater London, Essex and Hertfordshire from the River Thames to Ware, through areas such as Stratford, Clapton, Tottenham, Enfield, Walthamstow, Waltham Abbey, Cheshunt, Broxbourne and Hoddesdon in an area generally known as the Lea Valley.</p>',
+  '<strong>Lee Valley Park</strong><p><a href="https://www.visitleevalley.org.uk/" target="_blank" title="Opens in a new window">Lee Valley Park</a> is a 10,000-acre 26 miles long linear park, much of it green spaces, running through the northeast of Greater London, Essex and Hertfordshire from the River Thames to Ware, through areas such as Stratford, Clapton, Tottenham, Enfield, Walthamstow, Waltham Abbey, Cheshunt, Broxbourne and Hoddesdon in an area generally known as the Lea Valley.</p>',
   'park',
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-0.05608350852467861, 51.57224856390182]}'))
 );
