@@ -14,7 +14,12 @@ describe('index.html', () => {
         const btn = documentIndex.querySelector('button');
         expect(btn).toBeTruthy()
     })
-  
+
+    it('has a sign in/up link', () => {
+        const signin = documentIndex.querySelector('#sign-in');
+        expect(signin).toBeTruthy()
+    })
+    
     // it('tag with id = "map" is empty when the website loads', () => {
     //     const map = documentIndex.querySelector('#map');
     //     expect(map.innerHTML).toContain("")
