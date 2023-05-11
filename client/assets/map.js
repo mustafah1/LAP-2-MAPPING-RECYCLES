@@ -1,8 +1,8 @@
-import { mapboxApiToken } from "./mapboxapi.js";
 // TO MAKE THE MAP APPEAR YOU MUST
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
-mapboxgl.accessToken = mapboxApiToken;
+mapboxgl.accessToken = process.env.MAPBOX
+
 const map = new mapboxgl.Map({
   container: "map",
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
