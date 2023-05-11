@@ -1,5 +1,5 @@
 import { mapboxApiToken } from "./mapboxapi.js";
-serverUrl = "https://diarysite.onrender.com";
+const serverUrl = "https://diarysite.onrender.com";
 
 // TO MAKE THE MAP APPEAR YOU MUST
 // ADD YOUR ACCESS TOKEN FROM
