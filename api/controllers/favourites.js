@@ -28,6 +28,23 @@ async function getData(req,res) {
     }
   }
 
+  async function getFavIdFromPointId(req, res) {
+    try {
+        const idx = parseInt(req.params.id)
+        const fav_id = await Favourites.getFavIdFromPointId(idx)
+        res.status(200).json({
+          success: true,
+          fav_id: fav_id,
+        })
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: "Unable to retrieve favourite",
+            error: error,
+          })
+    }
+  }
+
 //function to retrieve points_id for a user - should be arrray of points id?
 async function getFavouritesByUser(req, res) {
     try {
@@ -90,5 +107,5 @@ async function getFavouritesByUser(req, res) {
 }
 
 module.exports = {
-    getData, getFavouriteById, getFavouritesByUser, addFavourite, destroy
+    getData, getFavouriteById, getFavouritesByUser, getFavIdFromPointId, addFavourite, destroy
 }

@@ -7,7 +7,7 @@ const favRouter = Router();
 favRouter.get("/", favController.getData); //remove this?
 favRouter.get("/:id", favController.getFavouriteById);
 favRouter.get("/user/:id", favController.getFavouritesByUser);
-
+favRouter.get("/fav/:id", favController.getFavIdFromPointId);
 favRouter.post("/", favController.addFavourite);
 favRouter.delete("/:id", favController.destroy);
 

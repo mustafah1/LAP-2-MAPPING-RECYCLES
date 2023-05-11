@@ -11,6 +11,15 @@ async function getData(req,res) {
     }
 }
 
+async function getIdDescr(req, res) {
+    try {
+        const idDescr = await Geo.getIdDescription()
+        res.json(idDescr)
+    } catch (error) {
+        res.status(500).json({"error": error.message})        
+    }
+}
+
 module.exports = {
-    getData
+    getData, getIdDescr
 }
