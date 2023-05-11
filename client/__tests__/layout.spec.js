@@ -68,3 +68,26 @@ describe('register.html', () => {
     //     expect(body.className).toBe('dark-mode')
     // })
 })
+
+
+describe('login.html', () => {
+    beforeEach(async () => {
+        domIndex = await renderDOM('./index.html');
+        domLogin = await renderDOM('./login.html');
+        documentIndex = await domIndex.window.document;
+        documentLogin = await domLogin.window.document;
+    })
+
+    it('has a search button', () => {
+        const btn = documentLogin.querySelector('button');
+        expect(btn).toBeTruthy()
+    })
+
+    it('has a "create an account" link', () => {
+        const register = documentIndex.querySelector('a');
+        expect(register).toBeTruthy()
+    })
+
+    
+
+})
