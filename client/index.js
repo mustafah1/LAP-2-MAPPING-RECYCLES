@@ -24,6 +24,8 @@ map.on("load", async () => {
   //console.log(data);
   createPlacesButtons(data);
 
+  loadFavourites(1) //HARDCORDED USER ID
+
   //add geojson data to mapbox
   map.addSource("places", data);
   //getGeoJsonData()
@@ -110,6 +112,7 @@ map.on("load", async () => {
 
 //for the sidebar
 createOpenNavElem();
+
 //addToFavourites();
 // }); //use this if adding custom images instead
 
@@ -147,6 +150,19 @@ async function getFavIdFromPointId(id) {
     const fav_id = await response.json();
     //console.log(geoJsonData)
     return fav_id;
+  } else {
+    return "error";
+  }
+}
+
+async function getFavsByUserId(id) {
+
+  const response = await fetch (`http://localhost:3000/favourites/user/${id}`);
+
+  if (response.status == 200) {
+    const favourite = await response.json();
+    //console.log(geoJsonData)
+    return favourite;
   } else {
     return "error";
   }
@@ -279,15 +295,55 @@ function createPlacesButtons(data) {
   }
 }
 
+//call this when page loads - after the buttons are added
 async function loadFavourites(userId) {
 
-  //call this when page loads
+  let favouriteObj = await getFavsByUserId(userId)
 
-  //get favourrites by user
+  let favourites_idsArray = favouriteObj.favourite.favourites_ids
 
-  //update the status of the buttons based on this
+  console.log(favourites_idsArray) //array of fav_id
 
+  //get points id from fav_id
+  //for each element in the array of fav_id - call localhost:3000/favourites/1 , get favourite.points_id
 
+  let points_idArray = []
+
+  for (let i= 0; i < favourites_idsArray.length; i++) {
+    const response = await fetch (`http://localhost:3000/favourites/${favourites_idsArray[i]}`);
+
+    if (response.status == 200) {
+      const favourite = await response.json();
+      
+      points_idArray.push(favourite.favourite.points_id)
+      console.log(points_idArray)
+      //return points_idArray;
+    } else {
+      return "error";
+    }
+  }
+
+  //update the status of the buttons based on points_id_Array
+
+  for (let i=0; i< points_idArray.length; i++)
+  {
+    let buttonsArray = document.getElementsByClassName("button")
+    for (let j= 0; j < buttonsArray.length; j++)
+    {
+      console.log(buttonsArray[j])
+      if (points_idArray[i] == j +1)      
+      {
+        console.log("got it")
+        if (buttonsArray[j].id === "no") {
+          buttonsArray[j].id = "yes";
+          buttonsArray[j].classList.add("active");
+      }
+
+    }
+
+  }
+
+}
 }
 
 async function getPointIdFromName(pointName) {
