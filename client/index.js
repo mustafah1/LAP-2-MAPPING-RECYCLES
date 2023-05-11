@@ -58,6 +58,11 @@ map.on("load", async () => {
     }
 
     new mapboxgl.Popup().setLngLat(coordinates).setHTML(description).addTo(map);
+
+    map.flyTo({
+      center: coordinates,
+      zoom: 15
+    });
   });
 
   // Change the cursor to a pointer when the mouse is over the places layer.
@@ -92,6 +97,11 @@ map.on("load", async () => {
           if (popUps[0]) popUps[0].remove();
 
           new mapboxgl.Popup().setLngLat(coorDescrArray[j].coordinates).setHTML(coorDescrArray[j].description).addTo(map);
+
+          map.flyTo({
+            center: coorDescrArray[j].coordinates,
+            zoom: 15
+          });
         }
       }
     };
