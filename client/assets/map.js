@@ -1,9 +1,11 @@
+import { mapboxApiToken } from "./mapboxapi.js";
+serverUrl = "https://diarysite.onrender.com";
+
 // TO MAKE THE MAP APPEAR YOU MUST
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
-token = process.env.MAPBOX
-
-const map = new toke.Map({
+mapboxgl.accessToken = mapboxApiToken;
+const map = new mapboxgl.Map({
   container: "map",
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: "mapbox://styles/mapbox/streets-v12",
@@ -24,7 +26,7 @@ map.on("load", async () => {
   //console.log(data);
   createPlacesButtons(data);
 
-  loadFavourites(1) //HARDCORDED USER ID
+  loadFavourites(1); //HARDCORDED USER ID
 
   //add geojson data to mapbox
   map.addSource("places", data);
@@ -63,7 +65,7 @@ map.on("load", async () => {
 
     map.flyTo({
       center: coordinates,
-      zoom: 15
+      zoom: 15,
     });
   });
 
@@ -83,26 +85,35 @@ map.on("load", async () => {
     buttons[i].onclick = () => {
       console.log(buttons[i].innerText);
 
-      let coorDescrArray = getFeaturesByDescriptionSubstring(buttons[i].innerText, data)
+      let coorDescrArray = getFeaturesByDescriptionSubstring(
+        buttons[i].innerText,
+        data
+      );
 
-      console.log(coorDescrArray)
+      console.log(coorDescrArray);
 
       //console.log(data);
 
-      for (let j = 0; j < coorDescrArray.length; j++) // how to get rid of other open popups? / also to center the map on the popup
-      {
-        if (extractString(coorDescrArray[j].description) == buttons[i].innerText)
-        {
-
-          const popUps = document.getElementsByClassName('mapboxgl-popup');
+      for (
+        let j = 0;
+        j < coorDescrArray.length;
+        j++ // how to get rid of other open popups? / also to center the map on the popup
+      ) {
+        if (
+          extractString(coorDescrArray[j].description) == buttons[i].innerText
+        ) {
+          const popUps = document.getElementsByClassName("mapboxgl-popup");
           /** Check if there is already a popup on the map and if so, remove it */
           if (popUps[0]) popUps[0].remove();
 
-          new mapboxgl.Popup().setLngLat(coorDescrArray[j].coordinates).setHTML(coorDescrArray[j].description).addTo(map);
+          new mapboxgl.Popup()
+            .setLngLat(coorDescrArray[j].coordinates)
+            .setHTML(coorDescrArray[j].description)
+            .addTo(map);
 
           map.flyTo({
             center: coorDescrArray[j].coordinates,
-            zoom: 15
+            zoom: 15,
           });
         }
       }
@@ -118,8 +129,9 @@ createOpenNavElem();
 
 //document.getElementsByClassName("placeButton").addEventListener('click', console.log("bla"))
 //function to get the geojson object from the db
+
 async function getGeoJsonObj() {
-  const response = await fetch("http://localhost:3000/geojson");
+  const response = await fetch(`${serverUrl}/geojson`);
 
   if (response.status == 200) {
     const geoJsonData = await response.json();
@@ -131,7 +143,8 @@ async function getGeoJsonObj() {
 }
 
 async function getIdDescrObj() {
-  const response = await fetch ("http://localhost:3000/geojson/iddescr");
+  const response = await fetch(`${serverUrl}/geojson/iddescr`);
+  // const response = await fetch ("http://localhost:3000/geojson/iddescr");
 
   if (response.status == 200) {
     const geoJsonData = await response.json();
@@ -143,8 +156,9 @@ async function getIdDescrObj() {
 }
 
 async function getFavIdFromPointId(id) {
+  const response = await fetch(`${serverUrl}/favourites/fav/${id}`);
 
-  const response = await fetch (`http://localhost:3000/favourites/fav/${id}`);
+  // const response = await fetch(`http://localhost:3000/favourites/fav/${id}`);
 
   if (response.status == 200) {
     const fav_id = await response.json();
@@ -156,8 +170,8 @@ async function getFavIdFromPointId(id) {
 }
 
 async function getFavsByUserId(id) {
-
-  const response = await fetch (`http://localhost:3000/favourites/user/${id}`);
+  const response = await fetch(`${serverUrl}/favourites/user/${id}`);
+  // const response = await fetch(`http://localhost:3000/favourites/user/${id}`);
 
   if (response.status == 200) {
     const favourite = await response.json();
@@ -170,26 +184,25 @@ async function getFavsByUserId(id) {
 
 //function to get coordinates and description for a place name, from the geojson data
 function getFeaturesByDescriptionSubstring(substring, data) {
-    const features = data.data.features;
-    const result = [];
-  
-    for (let i = 0; i < features.length; i++) {
-      const description = features[i].properties.description;
+  const features = data.data.features;
+  const result = [];
 
-      const strongText = extractString(description)
-  
-      if (strongText.includes(substring)) {
+  for (let i = 0; i < features.length; i++) {
+    const description = features[i].properties.description;
 
-        console.log(features[i].geometry.coordinates)
-        result.push({
-          coordinates: features[i].geometry.coordinates,
-          description: description
-        });
-      }
+    const strongText = extractString(description);
+
+    if (strongText.includes(substring)) {
+      console.log(features[i].geometry.coordinates);
+      result.push({
+        coordinates: features[i].geometry.coordinates,
+        description: description,
+      });
     }
-  
-    return result;
   }
+
+  return result;
+}
 
 /* Set the width of the side navigation to 250px */
 function openNav() {
@@ -216,53 +229,47 @@ function createOpenNavElem() {
 }
 
 function createFavouritesButton() {
+  const favButton = document.createElement("button");
+  favButton.className = "button";
+  favButton.id = "no";
 
-    const favButton = document.createElement("button");
-    favButton.className = "button";
-    favButton.id = "no";
+  const svgElement = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg"
+  );
+  svgElement.setAttribute("width", "24");
+  svgElement.setAttribute("height", "24");
+  svgElement.setAttribute("viewBox", "0 0 24 24");
 
-    const svgElement = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg"
-      );
-      svgElement.setAttribute("width", "24");
-      svgElement.setAttribute("height", "24");
-      svgElement.setAttribute("viewBox", "0 0 24 24");
-   
-      const path1 = document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "path"
-      );
-      path1.setAttribute(
-        "d",
-        "M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"
-      );
-  
-      svgElement.appendChild(path1);
+  const path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path1.setAttribute(
+    "d",
+    "M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"
+  );
 
-      favButton.appendChild(svgElement);
+  svgElement.appendChild(path1);
 
-      favButton.addEventListener("click", () => {
+  favButton.appendChild(svgElement);
 
-        const text = favButton.previousElementSibling.innerText
-        console.log("from event listener: " + text)
+  favButton.addEventListener("click", () => {
+    const text = favButton.previousElementSibling.innerText;
+    console.log("from event listener: " + text);
 
-        if (favButton.id === "no") {
-            favButton.id = "yes";
-            favButton.classList.add("active");
-            //call here to add to favourites
+    if (favButton.id === "no") {
+      favButton.id = "yes";
+      favButton.classList.add("active");
+      //call here to add to favourites
 
-            addToFavourites(text)
-        } else if (favButton.id === "yes") {
-            favButton.id = "no";
-            favButton.classList.remove("active");
-            //remove from favourites
-            removeFavourite(text)
-        }
-      })
+      addToFavourites(text);
+    } else if (favButton.id === "yes") {
+      favButton.id = "no";
+      favButton.classList.remove("active");
+      //remove from favourites
+      removeFavourite(text);
+    }
+  });
 
-      return favButton;
-
+  return favButton;
 }
 
 //function to add places buttons based on backend places data
@@ -276,21 +283,20 @@ function createPlacesButtons(data) {
   let placeNameArray = [];
   for (let i = 0; i < features.length; i++) {
     placeNameArray.push(extractString(features[i].properties.description));
-
   }
 
   for (let i = 0; i < placeNameArray.length; i++) {
     const lineDiv = document.createElement("div");
-    lineDiv.className = "align"
+    lineDiv.className = "align";
 
     const placeButton = document.createElement("a");
     placeButton.className = "placeButton";
     placeButton.innerText = placeNameArray[i];
 
-    let favButton = createFavouritesButton()
+    let favButton = createFavouritesButton();
 
     lineDiv.appendChild(placeButton);
-    lineDiv.appendChild(favButton)
+    lineDiv.appendChild(favButton);
     sideNavDiv.appendChild(lineDiv);
   }
 }
@@ -298,26 +304,28 @@ function createPlacesButtons(data) {
 //call this when page loads - after the buttons are added
 //re-enable favourites not working because of fav_id??
 async function loadFavourites(userId) {
+  let favouriteObj = await getFavsByUserId(userId);
 
-  let favouriteObj = await getFavsByUserId(userId)
+  let favourites_idsArray = favouriteObj.favourite.favourites_ids;
 
-  let favourites_idsArray = favouriteObj.favourite.favourites_ids
-
-  console.log(favourites_idsArray) //array of fav_id
+  console.log(favourites_idsArray); //array of fav_id
 
   //get points id from fav_id
   //for each element in the array of fav_id - call localhost:3000/favourites/1 , get favourite.points_id
 
-  let points_idArray = []
+  let points_idArray = [];
 
-  for (let i= 0; i < favourites_idsArray.length; i++) {
-    const response = await fetch (`http://localhost:3000/favourites/${favourites_idsArray[i]}`);
+  for (let i = 0; i < favourites_idsArray.length; i++) {
+    const response = await fetch(
+      `${serverUrl}/favourites/${favourites_idsArray[i]}`
+      // `http://localhost:3000/favourites/${favourites_idsArray[i]}`
+    );
 
     if (response.status == 200) {
       const favourite = await response.json();
-      
-      points_idArray.push(favourite.favourite.points_id)
-      console.log(points_idArray)
+
+      points_idArray.push(favourite.favourite.points_id);
+      console.log(points_idArray);
       //return points_idArray;
     } else {
       return "error";
@@ -326,41 +334,31 @@ async function loadFavourites(userId) {
 
   //update the status of the buttons based on points_id_Array
 
-  for (let i=0; i< points_idArray.length; i++)
-  {
-    let buttonsArray = document.getElementsByClassName("button")
-    for (let j= 0; j < buttonsArray.length; j++)
-    {
-      console.log(buttonsArray[j])
-      if (points_idArray[i] == j +1) //index starts at 0     
-      {
-        console.log("got it")
+  for (let i = 0; i < points_idArray.length; i++) {
+    let buttonsArray = document.getElementsByClassName("button");
+    for (let j = 0; j < buttonsArray.length; j++) {
+      console.log(buttonsArray[j]);
+      if (points_idArray[i] == j + 1) {
+        //index starts at 0
+        console.log("got it");
         if (buttonsArray[j].id === "no") {
           buttonsArray[j].id = "yes";
           buttonsArray[j].classList.add("active");
+        }
       }
-
     }
-
   }
-
-}
 }
 
 async function getPointIdFromName(pointName) {
+  let idDescr = await getIdDescrObj();
 
-  let idDescr = await getIdDescrObj()
-
-  for (let i=0; i < idDescr.length; i++)
-  {
-
-    if (extractString(idDescr[i].description) == pointName)
-    {
-      console.log("points_id: " + idDescr[i].points_id)
-      return idDescr[i].points_id
-    } 
+  for (let i = 0; i < idDescr.length; i++) {
+    if (extractString(idDescr[i].description) == pointName) {
+      console.log("points_id: " + idDescr[i].points_id);
+      return idDescr[i].points_id;
+    }
   }
-
 }
 
 //on click of favourite place, add it as favourite in the backend (?)
@@ -370,48 +368,45 @@ async function addToFavourites(pointName) {
   const options = {
     method: "POST",
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        user_id: 1, //HARDCODED - get user id from login??
-        points_id: await getPointIdFromName(pointName) //get point id from the name??
-    })
-  }
+      user_id: 1, //HARDCODED - get user id from login??
+      points_id: await getPointIdFromName(pointName), //get point id from the name??
+    }),
+  };
 
-  console.log(options)
+  console.log(options);
 
-  const result = await fetch("http://localhost:3000/favourites/", options)
-
+  const result = await fetch(`${serverUrl}/favourites/`, options);
   if (result.status == 201) {
     console.log("added to favourites");
-}
-
+  }
 }
 
 async function removeFavourite(pointName) {
+  const pointId = await getPointIdFromName(pointName);
 
-  const pointId = await getPointIdFromName(pointName)
+  console.log("pointId" + pointId);
 
-  console.log("pointId" + pointId)
+  const favouriteId = await getFavIdFromPointId(pointId); //get favId from pointId"
 
-  const favouriteId = await getFavIdFromPointId(pointId) //get favId from pointId" 
+  console.log(favouriteId.fav_id);
 
-  console.log(favouriteId.fav_id)
-
-  fetch(`http://localhost:3000/favourites/${favouriteId.fav_id}`, {
-  method: "DELETE",
-})
-  .then(response => {
-    if (response.ok) {
-      console.log("Favourite deleted successfully");
-    } else {
-      console.error("Failed to delete favourite");
-    }
+  fetch(`${serverUrl}/favourites/${favouriteId.fav_id}`, {
+    method: "DELETE",
   })
-  .catch(error => {
-    console.error(error);
-  });
+    .then((response) => {
+      if (response.ok) {
+        console.log("Favourite deleted successfully");
+      } else {
+        console.error("Failed to delete favourite");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function extractString(str) {
