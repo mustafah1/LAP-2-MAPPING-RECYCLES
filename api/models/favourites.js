@@ -8,6 +8,7 @@ class Favourites {
         this.points_id = points_id;
     }
 
+    //need to call this on login?
     static async getFavouritesByUser(id) {
         const response = await db.query("SELECT * FROM favourites WHERE user_id = $1", [id]);
         console.log(response.rows)
@@ -39,6 +40,18 @@ class Favourites {
         return new Favourites(response.rows[0]);
     }
 
+    static async getFavIdFromPointId(points_id) {
+        const response = await db.query("SELECT fav_id FROM favourites WHERE points_id = $1", [points_id])
+
+        // if (response.rows.length != 1) {
+        //     throw new Error("Unable to locate favourite.");
+        // }
+
+        console.log(response.rows[0].fav_id)
+        return response.rows[0].fav_id;
+
+    }
+
 // INSERT INTO favourites(user_id, points_id)
 // VALUES (1, 3);
     static async create(data) {
@@ -48,6 +61,13 @@ class Favourites {
         const newFavourite = await Favourites.getFavouritesByUser(userId)
         return newFavourite
     }
+
+
+//     IF NOT EXISTS (SELECT * FROM favourites WHERE column1 = $1 AND column2 = )
+// BEGIN
+//     INSERT INTO your_table (column1, column2, column3) VALUES ('value1', 'value2', 'value3')
+// END
+
 
     async destroy() {
         const response = await db.query("DELETE FROM favourites WHERE fav_id = $1 RETURNING *;", [this.fav_id])

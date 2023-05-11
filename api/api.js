@@ -2,12 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const logRoutes = require("./middleware/logger");
-const postRouter = require("./routers/post");
-const userRouter = require("./routers/user");
+const logRoutes = require('./middleware/logger');
+const postRouter = require('./routers/post');
+const userRouter = require('./routers/user');
 
-const geoRouter = require("./routers/geo");
-const favRouter = require("./routers/favourites");
+const geoRouter = require ('./routers/geo');
+const favRouter = require('./routers/favourites');
 
 const api = express();
 
