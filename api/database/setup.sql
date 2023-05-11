@@ -4,11 +4,6 @@ DROP TABLE IF EXISTS favourites;
 DROP TABLE IF EXISTS user_account;
 DROP TABLE IF EXISTS points;
 
--- DROP TABLE IF EXISTS restaurant_locations;
-
-
-
-
 CREATE TABLE post (
     post_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
@@ -38,7 +33,6 @@ CREATE TABLE token (
     FOREIGN KEY (user_id) REFERENCES user_account("user_id")
 );
 
-
 CREATE TABLE favourites (
   fav_id INT GENERATED ALWAYS AS IDENTITY,
   user_id INT NOT NULL,
@@ -46,26 +40,6 @@ CREATE TABLE favourites (
   points_id INT NOT NULL,
   FOREIGN KEY (points_id) REFERENCES points("points_id")
 );
--- CREATE TABLE restaurant_locations (
---   id SERIAL PRIMARY KEY,
---   name TEXT,
---   address TEXT,
---   city TEXT,
---   state TEXT,
---   zip TEXT,
---   geom GEOMETRY(Point, 4326)
--- );
-
--- INSERT INTO restaurant_locations (name, address, city, state, zip, geom)
--- VALUES (
---   'Example Restaurant',
---   '123 Main St',
---   'San Francisco',
---   'CA',
---   '94105',
---   ST_SetSRID(ST_MakePoint(-122.4090, 37.7837), 4326)
--- );
-
 
 
 INSERT INTO points (description, icon, geom)
@@ -84,14 +58,3 @@ VALUES (
   'bar',
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.090372, 38.881189]}'))
 );
-
--- INSERT INTO favourites(user_id, points_id)
--- VALUES (1, 3);
-
-  -- 'Make it Mount Pleasant',
-  -- 'theatre-15',
-  -- (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.038659, 38.931567]}'))
-
-
-
-
