@@ -9,8 +9,6 @@ const userRouter = require('./routers/user');
 const geoRouter = require ('./routers/geo');
 const favRouter = require('./routers/favourites');
 
-
-
 const api = express();
 
 api.use(cors());
@@ -27,6 +25,5 @@ api.use("/posts", postRouter);
 api.use("/users", userRouter);
 api.use("/geojson", geoRouter);
 api.use("/favourites", favRouter);
-
 
 module.exports = api;

@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS favourites;
 DROP TABLE IF EXISTS user_account;
 DROP TABLE IF EXISTS points;
 
-
 CREATE TABLE post (
     post_id INT GENERATED ALWAYS AS IDENTITY,
     title VARCHAR (100) NOT NULL,
@@ -42,6 +41,7 @@ CREATE TABLE favourites (
   FOREIGN KEY (points_id) REFERENCES points("points_id")
 );
 
+
 INSERT INTO points (description, icon, geom)
 VALUES (
   '<strong>Make it Mount Pleasant</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
@@ -57,8 +57,13 @@ VALUES (
   '<strong>Big Backyard Beach Bash and Wine Fest</strong><p>EatBar (2761 Washington Boulevard Arlington VA) is throwing a <a href="http://tallulaeatbar.ticketleap.com/2012beachblanket/" target="_blank" title="Opens in a new window">Big Backyard Beach Bash and Wine Fest</a> on Saturday, serving up conch fritters, fish tacos and crab sliders, and Red Apron hot dogs. 12:00-3:00 p.m. $25.grill hot dogs.</p>',
   'bar',
   (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.090372, 38.881189]}'))
-)
-;
+);
 
 -- INSERT INTO favourites(user_id, points_id)
 -- VALUES (1, 3);
+
+  -- 'Make it Mount Pleasant',
+  -- 'theatre-15',
+  -- (SELECT ST_GeomFromGeoJSON('{"type": "Point", "coordinates": [-77.038659, 38.931567]}'))
+
+
