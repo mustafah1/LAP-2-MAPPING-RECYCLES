@@ -9,7 +9,6 @@ const userRouter = require('./routers/user');
 const geoRouter = require ('./routers/geo');
 const favRouter = require('./routers/favourites');
 
-const geoRouter = require ('./routers/geo')
 
 
 const api = express();
