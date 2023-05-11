@@ -86,7 +86,12 @@ map.on("load", async () => {
       {
         if (extractString(coorDescrArray[j].description) == buttons[i].innerText)
         {
-            new mapboxgl.Popup().setLngLat(coorDescrArray[j].coordinates).setHTML(coorDescrArray[j].description).addTo(map);
+
+          const popUps = document.getElementsByClassName('mapboxgl-popup');
+          /** Check if there is already a popup on the map and if so, remove it */
+          if (popUps[0]) popUps[0].remove();
+
+          new mapboxgl.Popup().setLngLat(coorDescrArray[j].coordinates).setHTML(coorDescrArray[j].description).addTo(map);
         }
       }
     };
