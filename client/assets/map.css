@@ -5,7 +5,7 @@
 }
 
 body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+#map { position: absolute; top: 0; bottom: 0; width: 93%; margin-top:7.5%; margin-left: 5%; margin-right: -10%;}
 
 .mapboxgl-popup {
     max-width: 400px;
