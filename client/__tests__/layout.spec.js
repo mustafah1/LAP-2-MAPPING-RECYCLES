@@ -88,6 +88,12 @@ describe('login.html', () => {
         expect(register).toBeTruthy()
     })
 
-    
+    it('can go back to home page', () => {
+        const home = documentLogin.querySelector('#HOME');
+        home.click()
+        
+        expect(home).toBeTruthy()
+        // expect(global.window.location.href).toContain('/client/index.html')
+    })
 
 })
