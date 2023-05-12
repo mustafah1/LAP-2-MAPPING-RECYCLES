@@ -103,27 +103,7 @@ map.on("load", async () => {
     };
   }
 });
-async function getHomePageInfo(data) {
-  const homeDiscription = document.getElementById("discription");
 
-  const features = data.data.features;
-  let placeNameArray = [];
-  for (let i = 0; i < features.length; i++) {
-    placeNameArray.push(extractString(features[i].properties.description));
-  }
-  for (let i = 0; i < placeNameArray.length; i++) {
-    const lineDiv = homeDiscription.appendChild(document.createElement("div"));
-    lineDiv.className = "align";
-
-    const placeButton = document.createElement("a");
-    placeButton.className = "placeButton";
-    placeButton.innerText = placeNameArray[i];
-
-    lineDiv.appendChild(placeButton);
-  }
-}
-const data = getGeoJsonObj();
-getHomePageInfo(data);
 //for the sidebar
 createOpenNavElem();
 
