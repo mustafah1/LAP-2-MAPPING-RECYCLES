@@ -118,7 +118,9 @@ div[id^='box']:hover {
     margin: 20px 0;
   }
 #box1 {
-    background-image: url("./images/museum.jpeg");
+    background-image: url("./images/totstadium.jpeg");
+    background-position: center;
+    background-size: cover;
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -128,7 +130,9 @@ div[id^='box']:hover {
   }
 
 #box2 {
-    background-image: url("./images/lake.jpeg");
+    background-image: url("./images/canal.jpeg");
+    background-position: center;
+    background-size: cover;
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -138,7 +142,9 @@ div[id^='box']:hover {
 }
 
 #box3 {
-    background-image: url("./images/deer.jpeg");
+    background-image: url("./images/pub.jpeg");
+    background-position: center;
+    background-size: cover;
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -148,7 +154,9 @@ div[id^='box']:hover {
 }
 
 #box4 {
-    background-image: url("./images/dogsrunning.jpeg");
+    background-image: url("./images/chaku-nigerian.jpeg");
+    background-position: center;
+    background-size: cover;
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -159,7 +167,9 @@ div[id^='box']:hover {
 }
 
 #box5 {
-    background-image: url("./images/playground.jpeg");
+    background-image: url("./images/castle.jpeg");
+    background-position: center;
+    background-size: cover;
     width: 25%;
     height: 200px;
     padding: 20px;
@@ -170,7 +180,9 @@ div[id^='box']:hover {
 }
 
 #box6 {
-    background-image: url("./images/post\ office.jpeg");
+    background-image: url("./images/ferry-boat.jpeg");
+    background-position: center;
+    background-size: cover;
     width: 25%;
     height: 200px;
     padding: 20px;
