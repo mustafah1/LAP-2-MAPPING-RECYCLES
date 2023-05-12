@@ -19,9 +19,9 @@ body { margin: 0; padding: 0; }
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
     z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    top: 127px; /* Stay at the top level with map*/
     left: 0;
-    background-color: #111; /* Black*/
+    background-color: #fff; /* White*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
