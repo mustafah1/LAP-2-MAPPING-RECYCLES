@@ -5,8 +5,8 @@ const authenticator = require("../middleware/authenticator");
 
 const geoRouter = Router();
 
-geoRouter.get("/", authenticator, geoController.getData);
-geoRouter.get("/iddescr/", authenticator, geoController.getIdDescr)
+geoRouter.get("/", geoController.getData);
+geoRouter.get("/iddescr/", geoController.getIdDescr)
 
 
 module.exports = geoRouter;
