@@ -1,4 +1,6 @@
 import { mapboxApiToken } from "./mapboxapi.js";
+const serverUrl = "https://diarysite.onrender.com";
+
 // TO MAKE THE MAP APPEAR YOU MUST
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
@@ -107,7 +109,9 @@ createOpenNavElem();
 
 //function to get the geojson object from the db
 async function getGeoJsonObj() {
-  const response = await fetch("http://localhost:3000/geojson");
+    const response = await fetch(`${serverUrl}/geojson`);
+
+//   const response = await fetch("http://localhost:3000/geojson");
 
   if (response.status == 200) {
     const geoJsonData = await response.json();
@@ -119,8 +123,7 @@ async function getGeoJsonObj() {
 }
 
 async function getIdDescrObj() {
-  const response = await fetch ("http://localhost:3000/geojson/iddescr");
-
+    const response = await fetch(`${serverUrl}/geojson/iddescr`);
   if (response.status == 200) {
     const geoJsonData = await response.json();
     //console.log(geoJsonData)
@@ -131,8 +134,7 @@ async function getIdDescrObj() {
 }
 
 async function getFavIdFromPointId(id) {
-
-  const response = await fetch (`http://localhost:3000/favourites/fav/${id}`);
+  const response = await fetch(`${serverUrl}/favourites/fav/${id}`);
 
   if (response.status == 200) {
     const fav_id = await response.json();
@@ -144,8 +146,7 @@ async function getFavIdFromPointId(id) {
 }
 
 async function getFavsByUserId(id) {
-
-  const response = await fetch (`http://localhost:3000/favourites/user/${id}`);
+  const response = await fetch(`${serverUrl}/favourites/user/${id}`);
 
   if (response.status == 200) {
     const favourite = await response.json();
@@ -330,7 +331,8 @@ async function loadFavourites(userId) {
 
   for (let i= 0; i < favourites_idsArray.length; i++) {
 
-    const resp1 = await fetch (`http://localhost:3000/favourites/fav/${favourites_idsArray[i]}`)
+    const resp1 = await fetch (
+      `${serverUrl}/favourites/${favourites_idsArray[i]}`);
 
     if (resp1.status == 200) {
       const favourite = await resp1.json();
@@ -399,7 +401,7 @@ async function addToFavourites(pointName) {
 
   console.log(options)
 
-  const result = await fetch("http://localhost:3000/favourites/", options)
+  const result = await fetch(`${serverUrl}/favourites/`, options)
 
   if (result.status == 201) {
     console.log("added to favourites");
@@ -417,7 +419,7 @@ async function removeFavourite(pointName) {
 
   console.log(favouriteId.fav_id)
 
-  fetch(`http://localhost:3000/favourites/${favouriteId.fav_id}`, {
+  fetch(`${serverUrl}/favourites/${favouriteId.fav_id}` {
   method: "DELETE",
 })
   .then(response => {
