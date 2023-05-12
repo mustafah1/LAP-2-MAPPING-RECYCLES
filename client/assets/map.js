@@ -419,7 +419,7 @@ async function removeFavourite(pointName) {
 
   console.log(favouriteId.fav_id)
 
-  fetch(`${serverUrl}/favourites/${favouriteId.fav_id}` {
+  fetch(`${serverUrl}/favourites/${favouriteId.fav_id}`, {
   method: "DELETE",
 })
   .then(response => {
